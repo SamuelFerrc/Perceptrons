@@ -1,0 +1,10 @@
+# Ignorar a pasta build
+build/
+
+# Ignorar arquivos .log
+*.log
+
+*.txt
+*.ply
+*.png
+*.zip
