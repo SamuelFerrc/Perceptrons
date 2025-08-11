@@ -5,10 +5,10 @@ PImage imgP;
 PImage imgN;
 
 void setup() {
-  size(1920, 620);
+  size(1, 1);
 
-  String sourceFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Imagens"; // Pasta de entrada (imagens originais)
-  String destinationFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\3Heads"; // Pasta de saída
+  String sourceFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\RGB-Imagens";
+  String destinationFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\HOR-Imagens";
 
   File destFolder = new File(destinationFolder);
   if (!destFolder.exists()) {
@@ -22,12 +22,20 @@ void setup() {
     exit();
   }
 
-float w1 = 0.037136834; float w2 = 0.2519207; float w3 = -0.8409078;float bias = 210;
-float c = -135;
-int v = 0;
+  float w1 = 0.037136834;
+  float w2 = 0.2519207;
+  float w3 = -0.8409078;
+  float bias = 210;
+  float c = -135;
+  int v = 0;
+  if(files == null) return;
   for (File file : files) {
     v++;
-    if(v > 3) break;
+    if(v < 1215) continue;
+    bias = 150;
+    c = -213;
+    if(v > 1442) break;
+    println(v + "/" + files.length);
     if (file.isFile() && (file.getName().endsWith(".png") || file.getName().endsWith(".jpg"))) {
       String name = file.getName();
       img = loadImage(sourceFolder + "/" + name);
@@ -37,18 +45,16 @@ int v = 0;
 
       for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
-          if(v == 1) bias = 100;
-          if(v == 1017) bias = 145;
           color co = img.get(i, j);
           float r = i;
           float g = j;
           float b = abs(j - img.height / 2 - c);
 
-          if(red(co) == 255 && blue(co) == 0 && green(co) == 0)
+          if (red(co) == 255 && blue(co) == 0 && green(co) == 0)
           {
-            imgP.set(i,j,color(255,255,255));
+            imgP.set(i, j, color(255, 255, 255));
           }
-          
+
 
           float newS = (w1 * r) + (w2 * g) + (w3 * b) + bias;
           if (newS < 0) {

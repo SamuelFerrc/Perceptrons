@@ -6,74 +6,65 @@ import java.util.regex.Pattern;
 
 String[] imagePaths;
 int index = 0;
-PrintWriter output;
 
 void setup() {
-  size(800, 600);
   
-  // Carregar e ordenar corretamente as imagens
-  imagePaths = listPaths("C:\\Users\\lacer\\OneDrive\\Desktop\\2Heads");
+  imagePaths = listPaths("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\VER-Imagens");
   
   if (imagePaths.length < 2) {
     println("A pasta deve conter pelo menos 2 imagens.");
     exit();
   }
 
+  createBorder();
+
+  println("Processamento concluído.");
+  exit();
+}
+void createBorder()
+{
   index = 0;
-  
+
   while (index < imagePaths.length - 1) {
-    //println(index);
+    println(index + "/" + imagePaths.length);
     PImage img1 = loadImage(imagePaths[index]);
-    
-    for(int i =0 ; i < img1.width;i++)
-    {
-       for(int j = 0 ; j < img1.height;j++)
-       {
-         if(img1.get(i,j) == color(255,0,0))img1.set(i,j,color(255,255,255));
-       }
-    }
-    for(int i =1 ; i < img1.width -2 ;i += 3)
-    {
-      for(int j = 1 ; j < img1.height - 2;j+=3)
-      {
-        
-         color c1 = img1.get(i,j);
-         color c2 = img1.get(i+1,j);
-         color c3 = img1.get(i-1,j);
-         color c4 = img1.get(i,j+1);
-         color c5 = img1.get(i+1,j-1);
-         color c6 = img1.get(i-1,j-1);
-         color c7 = img1.get(i,j+1);
-         color c8 = img1.get(i+1,j+1);
-         color c9 = img1.get(i-1,j+1);
-         
-         if(isWhite(c1) || isWhite(c2  ) || isWhite(c3) || isWhite(c4) || isWhite(c5) || isWhite(c6) || isWhite(c7) || isWhite(c8) || isWhite(c9))
-         {
-           
-           
-         }
-         else 
-         {
-           img1.set(i,j,  color(255,255,255));
-           img1.set(i+1,j,color(255,255,255));
-           img1.set(i-1,j,color(255,255,255));
-           img1.set(i,j+1,  color(255,255,255));
-           img1.set(i+1,j+1,color(255,255,255));
-           img1.set(i-1,j+1,color(255,255,255));
-           img1.set(i,j-1,  color(255,255,255));
-           img1.set(i+1,j-1,color(255,255,255));
-           img1.set(i-1,j-1,color(255,255,255));
-         }
-         
-         
+    img1.loadPixels();
+
+    for (int i = 0; i < img1.pixels.length; i++) {
+      if (img1.pixels[i] == color(255, 0, 0)) {
+        img1.pixels[i] = color(255, 255, 255);
       }
     }
-    img1.save("/Images/Image" + index + ".png");
+    
+    PImage bordaImg = createImage(img1.width, img1.height, RGB);
+    bordaImg.loadPixels();
+
+    for (int y = 1; y < img1.height - 1; y++) {
+      for (int x = 1; x < img1.width - 1; x++) {
+        color c = img1.get(x, y);
+
+        if (!isWhite(c)) {
+          if (isWhite(img1.get(x+1, y)) ||
+              isWhite(img1.get(x-1, y)) ||
+              isWhite(img1.get(x, y+1)) ||
+              isWhite(img1.get(x, y-1))) {
+            
+            bordaImg.set(x, y, color(red(c), green(c), blue(c)));
+          } else {
+            bordaImg.set(x, y, color(255, 255, 255));
+          }
+        } else {
+          bordaImg.set(x, y, color(255, 255, 255));
+        }
+      }
+    }
+
+    bordaImg.updatePixels();
+    bordaImg.save("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\LIN-Imagens\\a_vm" + index + ".png");
     index++;
   }
 }
 
-Boolean isWhite(color c)
-{
-  return c == color(255,255,255) || c == color(255,0,0);
+boolean isWhite(color c) {
+  return c == color(255, 255, 255);
 }

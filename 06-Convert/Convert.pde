@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 void setup() {
-  File folder = new File(dataPath("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Cleaner\\output"));
+  File folder = new File(dataPath("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\LIN-Imagens"));
   File[] files = folder.listFiles();
 
   if (files == null) {
@@ -60,11 +60,21 @@ void convertImageToPLY(String imagePath, String outputPLYName,int i) {
 }
 
 void savePLY(ArrayList<PVector> points, ArrayList<PVector> rgb, String filename) {
-  PrintWriter output = createWriter("PLYS/"+filename);
-  
+  // Conta apenas os pontos que não são pretos
+  int validCount = 0;
+  for (int i = 0; i < points.size(); i++) {
+    if (!((int)rgb.get(i).x == 0 && (int)rgb.get(i).y == 0 && (int)rgb.get(i).z == 0)) {
+      validCount++;
+    }
+  }
+
+  PrintWriter output = createWriter(
+    "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\PLY-Imagens/" + filename
+  );
+
   output.println("ply");
   output.println("format ascii 1.0");
-  output.println("element vertex " + points.size());
+  output.println("element vertex " + validCount); // agora é o valor correto
   output.println("property float x");
   output.println("property float y");
   output.println("property float z");
@@ -72,13 +82,16 @@ void savePLY(ArrayList<PVector> points, ArrayList<PVector> rgb, String filename)
   output.println("property uchar green");
   output.println("property uchar blue");
   output.println("end_header");
-  
-  for(int i = 0 ; i < points.size(); i++)
-  {
-        output.println(points.get(i).x + "\t" +points.get(i).y + "\t" + points.get(i).z + "\t" + (int)rgb.get(i).x+"\t" + (int)rgb.get(i).y+"\t"+(int)rgb.get(i).z);
 
+  for (int i = 0; i < points.size(); i++) {
+    if ((int)rgb.get(i).x == 0 && (int)rgb.get(i).y == 0 && (int)rgb.get(i).z == 0) {
+      continue;
+    }
+    output.println(
+      points.get(i).x + "\t" + points.get(i).y + "\t" + points.get(i).z + "\t" +
+      (int)rgb.get(i).x + "\t" + (int)rgb.get(i).y + "\t" + (int)rgb.get(i).z
+    );
   }
-  
 
   output.flush();
   output.close();
