@@ -30,28 +30,13 @@ void setup() {
 
 
 
-  String caminho = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\RGBPerceptron\\Perceptron_01\\Treinamento\\A\\";
-  File pasta = new File(caminho);
- File[] arquivos = null;
-  if (pasta.isDirectory()) {
-     arquivos = pasta.listFiles(new FilenameFilter() {
-      public boolean accept(File dir, String nome) {
-        return 
-          nome.toLowerCase().endsWith(".txt"); 
-      }
-    }
-    );
-  }
-  if(arquivos == null) return;
-  println("Total of fiiles == " + arquivos.length);
-
   output = createWriter("pesos.txt");
-
-  for (int a =0; a < arquivos.length; a++)
+  
+  for (int a =0; a < 4; a++)
   {
-    println("Rodando "+a);
+    println("Rodando "+a + "/55");
 
-    linhas = loadStrings("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\RGBPerceptron\\Perceptron_01\\Treinamento\\A\\treinamento_"+a +".txt");
+    linhas = loadStrings("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\01-RGB Perceptron\\Perceptron_01\\Amostras\\FilesTXT\\treinamento_"+a +".txt");
     n = linhas.length;
 
     float[] TAs = {0.0001f, 0.001f, 0.01f, 0.1f};
@@ -61,7 +46,7 @@ void setup() {
 
 
     for (float TA : TAs) {
-      println("Testing with TA = " + TA);
+      //println("Testing with TA = " + TA);
 
       w1 = 127.0;
       w2 = 127.0;
@@ -72,13 +57,13 @@ void setup() {
       while (countInner < epocas) {
         erroQuadraticoMedio = 0;
 
-        for (int i = 0; i < min(linhas.length, 4096); i++) {
+        for (int i = 0; i < linhas.length; i++) {
           String[] values = linhas[i].split("\\s+");
           x = Float.parseFloat(values[0]);
           y = Float.parseFloat(values[1]);
           z = Float.parseFloat(values[2]);
           c = int(values[3]);
-
+          
           desejado = c;
           s = (w1 * x) + (w2 * y) + (w3 * z) + bias;
           saida = (s > 0) ? 1 : -1;
@@ -93,17 +78,18 @@ void setup() {
           }
 
           erroQuadraticoMedio += erro * erro;
+          //if(erroQuadraticoMedio == 0) break;
         }
 
         countInner++;
       }
 
-      erroQuadraticoMedio /= min(linhas.length, 4096);
+      erroQuadraticoMedio /= linhas.length;
 
-      println("Results for TA = " + TA + ":");
-      println("float w1 = " + w1 + "; float w2 = " + w2 + "; float w3 = " + w3 + ";" + " float bias = " + bias + ";");
+     // println("Results for TA = " + TA + ":");
+    //  println("float w1 = " + w1 + "; float w2 = " + w2 + "; float w3 = " + w3 + ";" + " float bias = " + bias + ";");
       println("Quadratic Mean Error == " + erroQuadraticoMedio);
-      println("---------------------------------------------------");
+     // println("---------------------------------------------------");
 
       if (erroQuadraticoMedio < menorErro) {
         menorErro = erroQuadraticoMedio;
@@ -115,12 +101,14 @@ void setup() {
       }
     }
     output.println(melhorW1 + "\t" + melhorW2+ "\t" + melhorW3 + "\t"+melhorBias);
-    println("\n");
-    println("======== Melhor Resultado ========");
-    println("Imagem == " + a+"/"+arquivos.length);
-    println("TA = " + melhorTA);
-    println("float w1 = " + melhorW1 + "; float w2 = " + melhorW2 + "; float w3 = " + melhorW3 + "; float bias = " + melhorBias + ";");
-    println("Menor Erro Quadrático Médio: " + menorErro);
+    //println("\n");
+   // println("======== Melhor Resultado ========");
+    //println("Imagem == " + a+"/"+arquivos.length);
+   // println("TA = " + melhorTA);
+   // println("float w1 = " + melhorW1 + "; float w2 = " + melhorW2 + "; float w3 = " + melhorW3 + "; float bias = " + melhorBias + ";");
+   // println("Menor Erro Quadrático Médio: " + menorErro);
+     output.flush();
+
   }
   output.flush();
   output.close();

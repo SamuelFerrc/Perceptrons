@@ -6,10 +6,10 @@ PImage imgN;
 
 //315 - 676
 void setup() {
-  size(1920, 620);
+  size(1, 1);
 
-  String sourceFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\3Heads"; // Pasta de entrada (imagens originais)
-  String destinationFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\2Heads"; // Pasta de saída
+  String sourceFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\HOR-Imagens";
+  String destinationFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\VER-Imagens";
 
   File destFolder = new File(destinationFolder);
   if (!destFolder.exists()) {
@@ -32,7 +32,7 @@ void setup() {
   int v = 0;
   for (File file : files) {
     v++;
-    if(v<310 || v > 350) continue;
+
     println(v);
     if (file.isFile() && (file.getName().endsWith(".png") || file.getName().endsWith(".jpg"))) {
       String name = file.getName();
@@ -42,16 +42,13 @@ void setup() {
 
       for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
-         bias = defRange(v, 316,676, 950.2192);
-          c = defRange(v, 310,350, 145);
           
-          color co = img.get(i, j);
           float r = i;
           float g = j;
-          float b = abs(i - img.width / 2 - c);
+          float b = abs(i - img.width / 2 );
 
-          float newS = (w1 * r) + (w2 * g) + (w3 * b) + bias;
-          if (newS < 0) {
+         // float newS = (w1 * r) + (w2 * g) + (w3 * b) + bias;
+          if (b > 850) {
             imgP.set(i, j, color(255, 0, 0));
           } else {
             imgN.set(i, j, color(0, 0, 255));
