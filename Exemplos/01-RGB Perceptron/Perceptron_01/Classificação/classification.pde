@@ -7,10 +7,9 @@ PImage imgP;
 PImage imgN;
 
 void setup() {
-  size(1920, 620);
+  size(0, 0);
 
-  String folderPath = "C:\\Users\\lacer\\OneDrive\\Desktop\\VisibleData";
-  String exitPath = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\01-RGB Perceptron\\Perceptron_01\\Classificação\\Imagens";
+  String folderPath = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\10-Head\\Imagens";
   File folder = new File(folderPath);
 
   if (!folder.exists() || !folder.isDirectory()) {
@@ -24,23 +23,21 @@ void setup() {
     println("Nenhuma imagem PNG encontrada na pasta.");
     exit();
   }
-  String[] linhas = loadStrings("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\01-RGB Perceptron\\Perceptron_01\\Treinamento\\pesos.txt");
+  String[] linhas = loadStrings("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\01-RGB Perceptron\\Perceptron_01\\Treinamento\\pesos2.txt");
 
   int a = 0;
+    print(linhas.length);
   while (a < linhas.length) {
+    String exitPath = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\10-Head\\Resultados";
 
     int v = 0;  // Zera o contador de imagens para esta linha de pesos
-
-    if(files == null) return; 
+    if(a != 1) {a++; continue;}
+    if(files == null) {print("Sem imagens"); return;} 
     for (File file : files) {
-      if ((v % (files.length/linhas.length) == 0 && v != 0)) {
-        a++;
-        println(linhas[a]);
-      }
+
 
       String[] ws = linhas[a].split("\t");
       float w1 = Float.parseFloat(ws[0]), w2 = Float.parseFloat(ws[1]), w3 = Float.parseFloat(ws[2]), bias = Float.parseFloat(ws[3]);
-      println(v + "/" + files.length);
 
 
       String fileName = file.getName();
@@ -69,6 +66,7 @@ void setup() {
       //imgN.save(exitPath + File.separator + fileName.replace(".png", "_N.png"));
 
       v++;
+      println(v + "/" + files.length + " - " + a + "/" + (linhas.length - 1));
     }
 
     a++;

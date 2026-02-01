@@ -7,8 +7,8 @@ PImage imgN;
 void setup() {
   size(1, 1);
 
-  String sourceFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\RGB-Imagens";
-  String destinationFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\HOR-Imagens";
+  String sourceFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\RGB-Imagens";
+  String destinationFolder = "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\HOR-Imagens";
 
   File destFolder = new File(destinationFolder);
   if (!destFolder.exists()) {
@@ -26,15 +26,16 @@ void setup() {
   float w2 = 0.2519207;
   float w3 = -0.8409078;
   float bias = 210;
-  float c = -135;
+  float c = -220;
   int v = 0;
   if(files == null) return;
   for (File file : files) {
     v++;
-    if(v < 1215) continue;
-    bias = 150;
-    c = -213;
-    if(v > 1442) break;
+    
+    if(v < 1480) continue;
+    bias = 60;
+    c = -310;
+    if(v > 1540) break;
     println(v + "/" + files.length);
     if (file.isFile() && (file.getName().endsWith(".png") || file.getName().endsWith(".jpg"))) {
       String name = file.getName();

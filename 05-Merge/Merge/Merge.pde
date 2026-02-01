@@ -12,25 +12,29 @@ void setup() {
   size(800, 600);
   
   // Carregar e ordenar corretamente as imagens
-  imagePaths = listPaths("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\LIN-Imagens");
+  imagePaths = listPaths("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\VER-Imagens");
   
   if (imagePaths.length < 2) {
     println("A pasta deve conter pelo menos 2 imagens.");
     exit();
   }
 
-  index = 0;
+  index = 1;
   while (index < imagePaths.length - 1) {
-    PImage img1 = loadImage("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\LIN-Imagens\\a_vm" + index + ".png");
-    PImage img2 = loadImage("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\LIN-Imagens\\a_vm" + (index+1) + ".png");
+    
+    try
+    {
+    
+    PImage img1 = loadImage("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\VER-Imagens\\a_vm" +(1000+ index) + "_P_P.png");
+    PImage img2 = loadImage("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\VER-Imagens\\a_vm" + (1000 + index+1) + "_P_P.png");
     int allPixels = 0;
-
+    
     for (int i = 0; i < img1.width; i++) {
       for (int j = 0; j < img1.height; j++) {
         color c1 = img1.get(i, j);
         color c2 = img2.get(i, j);
         
-        if (dist(red(c1), green(c1), blue(c1), red(c2), green(c2), blue(c2)) > 355 ) {
+        if (dist(red(c1), green(c1), blue(c1), red(c2), green(c2), blue(c2)) > 125 ) {
           img1.set(i, j, color(255, 255, 255));
           img2.set(i, j, color(255, 255, 255));
           allPixels++;
@@ -38,11 +42,17 @@ void setup() {
       }
     }
 
-    img1.save("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\MER-Imagens\\image" + index + ".png");
-    img2.save("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\MER-Imagens\\image" + (index + 1) + ".png");
-    //println(allPixels);
+    img1.save("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\MER-Imagens\\image" + index + ".png");
+    img2.save("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\MER-Imagens\\image" + (index + 1) + ".png");
+    println(allPixels);
     println(index + "/" + imagePaths.length);
     index += 2;
+ 
+}
+   catch(Exception e)
+  {
+    index++;
+  }
   }
 
  

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 void setup() {
-  File folder = new File(dataPath("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\LIN-Imagens"));
+  File folder = new File(dataPath("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\LIN-Imagens"));
   File[] files = folder.listFiles();
 
   if (files == null) {
@@ -28,6 +28,7 @@ void setup() {
   int i = 0;
   for (File file : files) {
     if (file.isFile() && file.getName().toLowerCase().endsWith(".png")) {
+      
       println("Convertendo: " + file.getName());
       convertImageToPLY(file.getAbsolutePath(), file.getName() + ".ply", i);
       i++;
@@ -49,9 +50,10 @@ void convertImageToPLY(String imagePath, String outputPLYName,int i) {
   for (int y = 0; y < img.height; y++) {
     for (int x = 0; x < img.width; x++) {
       color c = img.pixels[y * img.width + x];
-      if(c == color(255,255,255))continue;
+      if(c == color(255,255,255) || c == color(0,0,0) || (red(c) > 150 && green(c) > 150 && blue(c) > 150) )continue;
       float brightness = brightness(c); // 0-255
       points.add(new PVector(x, y, i));
+    //  println(red(c), green(c), blue(c));
       rgb.add(new PVector(red(c), green(c), blue(c)));
     }
   }
@@ -69,7 +71,7 @@ void savePLY(ArrayList<PVector> points, ArrayList<PVector> rgb, String filename)
   }
 
   PrintWriter output = createWriter(
-    "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\08-Resultados\\PLY-Imagens/" + filename
+    "C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\Resultados\\PLY-Imagens/" + filename
   );
 
   output.println("ply");

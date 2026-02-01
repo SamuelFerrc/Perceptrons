@@ -7,7 +7,6 @@ PImage[] imagens;
 String[] listaImagens;
 
 void setup() {
-  int n = 0;
   Float x = 0.0;
   Float y = 0.0;
   Float z = 0.0;
@@ -29,24 +28,21 @@ void setup() {
   float erroQuadraticoMedio = 0;
 
 
-
-  output = createWriter("pesos.txt");
+//46
+  output = createWriter("pesos2.txt");
   
-  for (int a =0; a < 4; a++)
+  for (int a =0; a < 56; a++)
   {
     println("Rodando "+a + "/55");
 
-    linhas = loadStrings("C:\\Users\\lacer\\OneDrive\\Desktop\\Perceptrons\\Perceptrons\\01-RGB Perceptron\\Perceptron_01\\Amostras\\FilesTXT\\treinamento_"+a +".txt");
-    n = linhas.length;
+    linhas = loadStrings("C:\\Users\\lacer\\OneDrive\\Desktop\\DadosFalharam\\treinamento_"+a +".txt");
 
     float[] TAs = {0.0001f, 0.001f, 0.01f, 0.1f};
     float menorErro = Float.MAX_VALUE;
     float melhorW1 = 0, melhorW2 = 0, melhorW3 = 0, melhorBias = 0;
-    float melhorTA = 0;
 
 
     for (float TA : TAs) {
-      //println("Testing with TA = " + TA);
 
       w1 = 127.0;
       w2 = 127.0;
@@ -99,6 +95,8 @@ void setup() {
         melhorBias = bias;
         melhorTA = TA;
       }
+           output.flush();
+
     }
     output.println(melhorW1 + "\t" + melhorW2+ "\t" + melhorW3 + "\t"+melhorBias);
     //println("\n");
