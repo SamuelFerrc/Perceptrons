@@ -3,8 +3,3 @@ build/
 
 # Ignorar arquivos .log
 *.log
-
-*.txt
-*.ply
-*.png
-*.zip
