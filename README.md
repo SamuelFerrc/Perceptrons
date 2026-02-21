@@ -25,3 +25,18 @@ Esse processo de cortar os dados e dividi-los vai ser finalizado na classificaç
 # Conclusão
 O perceptron por sua caracteristica binária linear tem por fundamento simular o funcionamento do cerebro humano, ao longo deste material didático desenvolvido haverá demonstrações uteis para o entendimento geral do Perceptron. <br>
 E para estudo mais amplo, seguindo adiante entederá ao fim disto onde o perceptron se encaixa nas rede neurais.
+
+# Execução
+Para o processamento dos dados utilizando dos Perceptrons; Foram desenvolvidos 3 Perceptrons para limpeza de imagens Bidimensionais, imagens essas que precisam permitir separação binaria simples. Dito isso, disponha de um pacote de dados para execução. Utilizamos o [Visible Human Data Male](https://data.lhncbc.nlm.nih.gov/public/Visible-Human/Male-Images/index.html), disponivel publicamente. 
+
+O Perceptron RGB, responsavel por uma separação RGB da região de interesse das imagens, estará disponivel em.
+#### 01-RGB Perceptron/Perceptron_01
+Sendo necessario os 3 Processos de execução
+
+O Perceptron Horizontal, responsavel por uma separação Horizontal dos ruidos da região de interesse das imagens, estará disponivel em.
+#### 02-Horizontal Perceptron/PipelinePerc
+Sendo necessario os 3 Processos de execução
+
+O Perceptron Vertical, responsavel por uma separação Vertical dos ruidos da região de interesse das imagens, estará disponivel em.
+#### 03-Vertical Perceptron
+Sendo necessario os 3 Processos de execução
