@@ -27,16 +27,22 @@ O perceptron por sua caracteristica binária linear tem por fundamento simular o
 E para estudo mais amplo, seguindo adiante entederá ao fim disto onde o perceptron se encaixa nas rede neurais.
 
 # Execução
-Para o processamento dos dados utilizando dos Perceptrons; Foram desenvolvidos 3 Perceptrons para limpeza de imagens Bidimensionais, imagens essas que precisam permitir separação binaria simples. Dito isso, disponha de um pacote de dados para execução. Utilizamos o [Visible Human Data Male](https://data.lhncbc.nlm.nih.gov/public/Visible-Human/Male-Images/index.html), disponivel publicamente. 
+Para o processamento dos dados por meio de Perceptrons, foram desenvolvidos três modelos distintos, cada um responsável por uma etapa específica na limpeza de imagens bidimensionais. Essas imagens devem permitir uma separação binária simples, requisito essencial para a correta segmentação da região de interesse.
 
-O Perceptron RGB, responsavel por uma separação RGB da região de interesse das imagens, estará disponivel em.
-#### 01-RGB Perceptron/Perceptron_01
-Sendo necessario os 3 Processos de execução
+Como base para os experimentos, foi utilizado o conjunto de dados **Visible Human Data Male**, disponibilizado publicamente pela U.S. National Library of Medicine, garantindo padronização e reprodutibilidade dos testes.
 
-O Perceptron Horizontal, responsavel por uma separação Horizontal dos ruidos da região de interesse das imagens, estará disponivel em.
-#### 02-Horizontal Perceptron/PipelinePerc
-Sendo necessario os 3 Processos de execução
+Os modelos implementados são descritos a seguir:
 
-O Perceptron Vertical, responsavel por uma separação Vertical dos ruidos da região de interesse das imagens, estará disponivel em.
-#### 03-Vertical Perceptron
-Sendo necessario os 3 Processos de execução
+* **Perceptron RGB** – Responsável pela segmentação inicial da região de interesse a partir da separação dos canais RGB da imagem.
+  Diretório: `01-RGB Perceptron/Perceptron_01`
+  Para sua execução completa, é necessária a realização dos três processos definidos no pipeline.
+
+* **Perceptron Horizontal** – Responsável pela remoção de ruídos com orientação predominantemente horizontal na região segmentada.
+  Diretório: `02-Horizontal Perceptron/PipelinePerc`
+  Também requer a execução dos três processos estabelecidos.
+
+* **Perceptron Vertical** – Responsável pela eliminação de ruídos com orientação predominantemente vertical na região de interesse.
+  Diretório: `03-Vertical Perceptron`
+  Assim como os anteriores, demanda a execução dos três processos correspondentes.
+
+Essa abordagem modular permite um refinamento progressivo da imagem, combinando segmentação por cor e filtragem direcional para aprimorar a qualidade da separação binária final.
