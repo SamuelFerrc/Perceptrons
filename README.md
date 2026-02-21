@@ -46,3 +46,4 @@ Os modelos implementados são descritos a seguir:
   Assim como os anteriores, demanda a execução dos três processos correspondentes.
 
 Essa abordagem modular permite um refinamento progressivo da imagem, combinando segmentação por cor e filtragem direcional para aprimorar a qualidade da separação binária final.
+Todos os resultados obtidos podem ser encontrados em `Resultados/`
