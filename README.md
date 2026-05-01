@@ -7,7 +7,7 @@ This repository aims to explain the smallest unit of a neural network — the **
 ## 📌 What is a Perceptron?
 
 It’s completely normal to feel unsure about what perceptrons are when starting out in neural networks.  
-A perceptron is the most basic unit of a neural network — meaning it plays a role similar to a neuron in the human brain.
+A perceptron is the most basic unit of a neural network, meaning it plays a role similar to a neuron in the human brain.
 
 Understanding this analogy is fundamental to grasping how perceptrons work at their core.
 
