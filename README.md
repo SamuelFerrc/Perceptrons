@@ -1,49 +1,117 @@
-# Perceptron
-Esse repositório tem por objetivo explicitar o menor nó de uma rede neural - Perceptron - utilizando de exemplos computacionais.
-# O que são os perceptrons?
-É normal não saber ao certo o que são perceptrons, a duvida é viva em muitos que chegaram agora em redes neurais.<br>
-Perceptrons são o menor nó de uma rede neural - o que significa? - significa que o perceptron em uma rede neural assume o mesmo papel de um neurônio humano.<br>
-Entender isso é fundamental para entender o perceptron em sua base.
+# 🧠 Perceptron
 
-# Composição de um neurônio
-Um neurônio no cerebro humano assume o papel de celula básica responsavel por receber uma informação, utiliza-la e envia-la adiante.<br>
+This repository aims to explain the smallest unit of a neural network — the **Perceptron** — through practical computational examples.
 
-# Composição de um perceptron
-Perceptron é um classificador binário linear, que realiza o mesmo procedimento de receber uma informação, utiliza-la e envia-la adiante. <br>
-Esse processo é caracterizado por 3 procedimentos fundamentais que constroem o perceptron.
+---
 
-# 3 Processos Fundamentais
-### Amostragem:
-O procedimento de amostragem do perceptron é onde escolhemos dados para treinar o perceptron - dados esses que precisam estar previamente classificados em uma distinção binária de 0 ou 1 - esses dados será utilizado a frente no treinamento.
+## 📌 What is a Perceptron?
 
-### Treinamento:
-Com o dado(s) da amostragem utilizaremos da caracteristica de linearidade do perceptron para gerar uma estrutura linear de N dimensões para ser capaz de "cortar" os dados e dividi-los.<br>
+It’s completely normal to feel unsure about what perceptrons are when starting out in neural networks.  
+A perceptron is the most basic unit of a neural network — meaning it plays a role similar to a neuron in the human brain.
 
-### Classificação:
-Esse processo de cortar os dados e dividi-los vai ser finalizado na classificação ao se utilizar o plano de corte previamente gerado para classificar os dados de acordo a posição relativa à estrutura linear.<br>
+Understanding this analogy is fundamental to grasping how perceptrons work at their core.
 
-# Conclusão
-O perceptron por sua caracteristica binária linear tem por fundamento simular o funcionamento do cerebro humano, ao longo deste material didático desenvolvido haverá demonstrações uteis para o entendimento geral do Perceptron. <br>
-E para estudo mais amplo, seguindo adiante entederá ao fim disto onde o perceptron se encaixa nas rede neurais.
+---
 
-# Execução
-Para o processamento dos dados por meio de Perceptrons, foram desenvolvidos três modelos distintos, cada um responsável por uma etapa específica na limpeza de imagens bidimensionais. Essas imagens devem permitir uma separação binária simples, requisito essencial para a correta segmentação da região de interesse.
+## 🧬 Structure of a Biological Neuron
 
-Como base para os experimentos, foi utilizado o conjunto de dados **Visible Human Data Male**, disponibilizado publicamente pela U.S. National Library of Medicine, garantindo padronização e reprodutibilidade dos testes.
+A neuron in the human brain acts as a basic cell responsible for:
+- Receiving information  
+- Processing it  
+- Transmitting it forward  
 
-Os modelos implementados são descritos a seguir:
+---
 
-* **Perceptron RGB** – Responsável pela segmentação inicial da região de interesse a partir da separação dos canais RGB da imagem.
-  Diretório: `01-RGB Perceptron/Perceptron_01`
-  Para sua execução completa, é necessária a realização dos três processos definidos no pipeline.
+## ⚙️ Structure of a Perceptron
 
-* **Perceptron Horizontal** – Responsável pela remoção de ruídos com orientação predominantemente horizontal na região segmentada.
-  Diretório: `02-Horizontal Perceptron/PipelinePerc`
-  Também requer a execução dos três processos estabelecidos.
+A perceptron is a **linear binary classifier** that follows the same idea:
+- Receives input  
+- Processes it  
+- Produces an output  
 
-* **Perceptron Vertical** – Responsável pela eliminação de ruídos com orientação predominantemente vertical na região de interesse.
-  Diretório: `03-Vertical Perceptron`
-  Assim como os anteriores, demanda a execução dos três processos correspondentes.
+This process is defined by three fundamental steps.
 
-Essa abordagem modular permite um refinamento progressivo da imagem, combinando segmentação por cor e filtragem direcional para aprimorar a qualidade da separação binária final.
-Todos os resultados obtidos podem ser encontrados em `Resultados/`
+---
+
+## 🔄 Three Fundamental Processes
+
+### 1. 📊 Sampling
+The sampling step consists of selecting data to train the perceptron.  
+These data must already be labeled in a binary way (**0 or 1**).
+
+---
+
+### 2. 🏋️ Training
+Using the sampled data, the perceptron leverages its linear nature to create an **N-dimensional decision boundary** capable of separating the data.
+
+---
+
+### 3. 🔍 Classification
+The decision boundary generated during training is used to classify new data based on their position relative to that boundary.
+
+---
+
+## 🧾 Conclusion
+
+Due to its binary and linear nature, the perceptron simulates a simplified version of how neurons operate in the human brain.  
+
+This repository provides practical demonstrations to support a deeper understanding of perceptrons and their role within neural networks.
+
+---
+
+# 🚀 Execution
+
+To process data using perceptrons, three distinct models were developed, each responsible for a specific stage in the cleaning of two-dimensional images.
+
+These images must allow for a simple binary separation, which is essential for correct segmentation of the region of interest.
+
+---
+
+## 📂 Dataset
+
+The experiments use the **Visible Human Data Male**, publicly available from the U.S. National Library of Medicine, ensuring:
+- Standardization  
+- Reproducibility  
+
+---
+
+## 🧩 Implemented Models
+
+### 🎨 RGB Perceptron
+Responsible for the initial segmentation of the region of interest by separating the RGB channels of the image.
+
+- 📁 Directory: `01-RGB Perceptron/Perceptron_01`
+- ⚠️ Requires execution of all three pipeline processes
+
+---
+
+### ➖ Horizontal Perceptron
+Removes noise with predominantly **horizontal orientation** from the segmented region.
+
+- 📁 Directory: `02-Horizontal Perceptron/PipelinePerc`
+- ⚠️ Requires execution of all three pipeline processes
+
+---
+
+### ➕ Vertical Perceptron
+Removes noise with predominantly **vertical orientation** in the region of interest.
+
+- 📁 Directory: `03-Vertical Perceptron`
+- ⚠️ Requires execution of all three pipeline processes
+
+---
+
+## 🧠 Approach
+
+This modular approach allows:
+- Progressive refinement of the image  
+- Combination of color-based segmentation  
+- Directional filtering for noise removal  
+
+Resulting in improved **binary segmentation quality**.
+
+---
+
+## 📊 Results
+
+All results can be found in:
