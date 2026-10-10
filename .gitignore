@@ -1,5 +1,0 @@
-# Ignorar a pasta build
-build/
-
-# Ignorar arquivos .log
-*.log

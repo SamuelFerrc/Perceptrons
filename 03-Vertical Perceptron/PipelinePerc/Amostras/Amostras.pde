@@ -1,53 +1,48 @@
-PImage img;
-PrintWriter output;
+import java.io.File;
 
+final int TOTAL_AMOSTRAS = 4096;
+final int DISTANCIA_LIMITE = 250;
+final int SEMENTE = 202408;
 
 void setup() {
   size(400, 400);
-  img = loadImage("img.png");
+  PImage imagem = loadImage("data/img.png");
+  if (imagem == null) {
+    println("ERRO: imagem de referência não encontrada em " + sketchPath("data/img.png"));
+    exit();
+    return;
+  }
 
-  output = createWriter("C:/Users/lacer/OneDrive/Desktop/ThirdPercep/PipelinePerc/Treinamento/processingSaveData.txt");
+  File pastaSaida = new File(sketchPath("../Treinamento/data"));
+  pastaSaida.mkdirs();
+  PrintWriter saida = createWriter(pastaSaida.getAbsolutePath() + File.separator +
+    "processingSaveData.txt");
+  randomSeed(SEMENTE);
 
-  color c;
-  float r = 0, g = 255, b = 255;
-  float n = 0;
-  int contp = 0;
-  int contn = 0;
-  int cont = 0;
-  int distPar = 250;
-  while (cont < 4096)
-  {
-
-    int i = (int)random(img.width);
-    int j = (int)random(img.height);
-  
-    float distA = abs(j - (img.height/2-200));
-    // print(dv + "\n");
-    if (distA > distPar && contn < 2048)
-    {
-      contn++;
-      output.println(i+"\t"+j+"\t"+distA+"\t-1");
-      cont++;
+  int positivos = 0;
+  int negativos = 0;
+  int tentativas = 0;
+  int limiteTentativas = TOTAL_AMOSTRAS * 1000;
+  while (positivos + negativos < TOTAL_AMOSTRAS && tentativas < limiteTentativas) {
+    tentativas++;
+    int x = int(random(imagem.width));
+    int y = int(random(imagem.height));
+    float distancia = abs(y - (imagem.height / 2.0f - 200));
+    if (distancia > DISTANCIA_LIMITE && negativos < TOTAL_AMOSTRAS / 2) {
+      negativos++;
+      saida.println(x + "\t" + y + "\t" + distancia + "\t-1");
+    } else if (distancia <= DISTANCIA_LIMITE && positivos < TOTAL_AMOSTRAS / 2) {
+      positivos++;
+      saida.println(x + "\t" + y + "\t" + distancia + "\t+1");
     }
+  }
 
-    if (distA <= distPar && contp < 2048)
-    {
-      contp++;
-      output.println(i+"\t"+j+"\t"+distA+"\t+1");
-      cont++;
-    }
-  }//end-for-j
-
-  println("contn == "+contn);
-  println("contp == "+ contp);
-
-  output.flush();
-  output.close();
+  saida.flush();
+  saida.close();
+  if (positivos + negativos != TOTAL_AMOSTRAS) {
+    println("ERRO: não foi possível obter 2048 exemplos de cada classe.");
+  } else {
+    println("Amostragem histórica vertical concluída: 2048 positivos e 2048 negativos.");
+  }
   exit();
-}
-
-
-
-void draw() {
-  image(img, 0, 0);
 }
